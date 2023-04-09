@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+        // Hello is a Functional component
+        // function Hello() {
+        //     return (
+        //         // JSX only
+        //         <h1> hii </h1>
+        //     )
+        // }
+
+        // props is a obj
+        // props are arguments that are passed to a functional comp.
+        // function Hello(props) {
+        //     console.log(props);
+        //     return (
+        //         // JSX only
+        //         <h1> hii {props.name} Age {props.age}</h1>
+        //     )
+        // }
+
+        // Destructuring
+        function Hello({name="default",age="1"}) {
+            return (
+                // JSX only
+                <h1> hii {name} Age {age}</h1>
+            )
+        }
+        function Hellos() {
+            return (
+                // we can return only 1 JSX element
+                // therefore we have to wrap Hello is this
+                <React.Fragment>
+                    <Hello name="abc" age="11"/>
+                    <Hello name="midnight" />
+                    <Hello />
+                    <Hello />
+                </React.Fragment>
+            )
+        }
+        // 1st argument -> component you want to render , 2nd arg -> parent whos child will be 1st arg
+        // ReactDOM.render(<Hello></Hello>, document.getElementById("root"));
+        ReactDOM.render(<Hellos/>, document.getElementById("root"));
+        // ReactDOM.render(<Hello name="midnight"/>, document.getElementById("root"));
+    </script>
+</body>
+
+</html>
