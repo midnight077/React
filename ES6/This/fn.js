@@ -45,4 +45,4 @@ function fn(){
 }
 fn();
 
-// setTimeout(obj.func , 1000);
+// setTimeout(obj.func , 1000); // value of this will be window 
