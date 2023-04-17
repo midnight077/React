@@ -69,19 +69,15 @@ export default class Todo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currTask: "",
             tasks: [{ id: 1, txt: "Task 1" }, { id: 2, txt: "Task 2" }, { id: 3, txt: "Task 3" }]
         }
     }
-    handleChange = (e) => {
-        let ctask = e.target.value;
-        this.setState({ currTask: ctask });
-    }
+    
 
-    addTask = () => {
+    addTask = (currTask) => {
         this.setState({
-            currTask: "",
-            tasks: [...this.state.tasks, { id: this.state.tasks.length + 1, txt: this.state.currTask }]
+           
+            tasks: [...this.state.tasks, { id: this.state.tasks.length + 1, txt: currTask }]
         })
     }
     onDelete = (id) => {
@@ -92,7 +88,7 @@ export default class Todo extends Component {
     render() {
         return (
             <>
-            <InputComponent handleChange={this.handleChange} value={this.state.currTask} addTask={this.addTask} />
+            <InputComponent addTask={this.addTask} />
             <TaskListComponent tasksArr = {this.state.tasks} onDelete={this.onDelete} />
             </>
         )
@@ -103,12 +99,22 @@ export default class Todo extends Component {
 class InputComponent extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            currTask:""
+        }
+    }
+    handleChange = (e) => {
+        let ctask = e.target.value;
+        this.setState({ currTask: ctask });
     }
     render() {
         return (
             <div className='input-container'>
-                <input type='text' onChange={this.props.handleChange} value={this.props.value} ></input>
-                <button onClick={this.props.addTask} > Add </button>
+                <input type='text' onChange={this.handleChange} value={this.state.currTask} ></input>
+                <button onClick={()=>{
+                    this.props.addTask(this.state.currTask)
+                    this.setState({currTask:""})
+                    }} > Add </button>
             </div>
         )
     }
